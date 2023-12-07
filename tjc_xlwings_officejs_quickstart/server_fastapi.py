@@ -145,7 +145,7 @@ def main():
     import uvicorn
 
     uvicorn.run(
-        "server_fastapi:cors_app",
+        "tjc_xlwings_officejs_quickstart.server_fastapi:cors_app",
         host="127.0.0.1",
         port=8000,
         reload=True,
