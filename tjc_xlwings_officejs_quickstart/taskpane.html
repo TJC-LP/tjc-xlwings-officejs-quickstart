@@ -37,7 +37,7 @@
     document.getElementById("btn-capitalize-sheet-names").addEventListener("click", capitalizeSheetNamesPrompt);
 
     // Sample 1: Button on Task pane
-    // Use runPython with the desired endpoint of your web app 
+    // Use runPython with the desired endpoint of your web tjc_xlwings_officejs_quickstart
     function helloTaskpane() {
       xlwings.runPython(window.location.origin + "/hello");
     }
@@ -57,7 +57,7 @@
     }
     // This function gets called when the user clicks a button in the alert shown
     // by capitalizeSheetNamesPrompt. Use this function name as the callback parameter
-    // in Python: book.app.alert(callback="capitalizeSheetNames")
+    // in Python: book.tjc_xlwings_officejs_quickstart.alert(callback="capitalizeSheetNames")
     function capitalizeSheetNames(arg) {
       if (arg == "ok") {
         xlwings.runPython(window.location.origin + "/capitalize-sheet-names");

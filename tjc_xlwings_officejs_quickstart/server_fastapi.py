@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Annotated
 
-import custom_functions
+import tjc_xlwings_officejs_quickstart.custom_functions as custom_functions
 import jinja2
 import markupsafe
 import xlwings as xw
@@ -70,7 +70,7 @@ async def capitalize_sheet_names(book: Book):
 async def alert(
     request: Request, prompt: str, title: str, buttons: str, mode: str, callback: str
 ):
-    """Boilerplate required by book.app.alert() and to show unhandled exceptions"""
+    """Boilerplate required by book.tjc_xlwings_officejs_quickstart.alert() and to show unhandled exceptions"""
     return templates.TemplateResponse(
         "xlwings-alert.html",
         {
@@ -104,7 +104,7 @@ async def custom_functions_call(data: dict = Body):
 
 
 # Add xlwings.html as additional source for templates so the /xlwings/alert endpoint
-# will find xlwings-alert.html. "mytemplates" can be a dummy if the app doesn't use
+# will find xlwings-alert.html. "mytemplates" can be a dummy if the tjc_xlwings_officejs_quickstart doesn't use
 # own templates
 loader = jinja2.ChoiceLoader(
     [
@@ -130,7 +130,7 @@ async def exception_handler(request, exception):
 
 
 # Office Scripts and custom functions in Excel on the web require CORS
-# Using app.add_middleware won't add the CORS headers if you handle the root "Exception"
+# Using tjc_xlwings_officejs_quickstart.add_middleware won't add the CORS headers if you handle the root "Exception"
 # in an exception handler (it would require a specific exception type). Note that
 # cors_app is used in the uvicorn.run() call below.
 cors_app = CORSMiddleware(
@@ -141,14 +141,18 @@ cors_app = CORSMiddleware(
 )
 
 
-if __name__ == "__main__":
+def main():
     import uvicorn
 
     uvicorn.run(
-        "server_fastapi:cors_app",
+        "tjc_xlwings_officejs_quickstart.server_fastapi:cors_app",
         host="127.0.0.1",
         port=8000,
         reload=True,
         ssl_keyfile=this_dir.parent / "certs" / "localhost+2-key.pem",
         ssl_certfile=this_dir.parent / "certs" / "localhost+2.pem",
     )
+
+
+if __name__ == "__main__":
+    main()

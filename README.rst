@@ -13,9 +13,6 @@ This quickstart shows you:
 xlwings Server, the backend for Office.js-based add-ins, can be used with any web framework and the quickstart repo therefore contains various implementations:
 
 * FastAPI: ``app/server_fastapi.py``
-* Starlette: ``app/server_starlette.py``
-* Flask: ``app/server_flask.py``
-* Django: ``app/server_django.py``
 
 At the end of this quickstart, you'll have a working environment for local development.
 
@@ -30,34 +27,22 @@ At the end of this quickstart, you'll have a working environment for local devel
 
    This will generate two files ``localhost+2.pem`` and ``localhost+2-key.pem``: move them to the ``certs`` directory in the root of the ``xlwings-officejs-quickstart`` quickstart repo.
 
-4. **Install Python dependencies**: 
-   
-   * Local Python installation: create a virtual or Conda environment and install the Python dependencies by running (replace ``fastapi`` with your framework): ``pip install -r requirements-fastapi.txt``.
-   * Docker: skip this step.
+4. **Install Python dependencies**:
 
-5. **xlwings license key**:
+   * Local Python installation: create a ``poetry`` environment by running ``poetry install``.
 
-   Get a free `trial license key <https://www.xlwings.org/trial>`_ and install it as follows:
+5. **License Keys**:
 
-   * Local Python installation: ``xlwings license update -k your-license-key``
-   * Docker: set the license key as ``XLWINGS_LICENSE_KEY`` environment variable. The easiest way to do this is to run ``cp .env.template .env`` in a Terminal/Command Prompt and fill in the license key in the ``.env`` file.
+   You can find our ``xlwings`` trial key and ``openai`` API key in Keeper via ``tjc-secrets/xlwings-trial-key`` and ``tjc-secrets/openai-api-key``, respectively. Run ``cp .env.template .env`` and add them to the newly created ``.env`` file.
 
 6. **Start web app**
 
-   * Local Python installation: with the previously created virtual/Conda env activated, start the Python development server by running the Python file with the desired implementation
-
-     - FastAPI: ``python app/server_fastapi.py``
-     - Starlette: ``python app/server_starlette.py``
-     - Flask: ``python app/server_flask.py``
-     - Django: ``python app/server_django.py runsslserver --certificate certs/localhost+2.pem --key certs/localhost+2-key.pem`` Note that if you're using VBA, Office Scripts, or Google Apps Script instead of Office.js, you can also use the Django development server by running ``python app/server_django.py runserver`` instead (Office.js is the only client to support custom functions though).
-
-   * Docker: run ``docker compose up`` instead. Note that Docker has been set up with FastAPI, so you would need to edit ``docker-compose.yaml`` and ``Dockerfile`` if you want to use a different framework.
-   
+   * Run ``poetry run app``
    If you see the following, the server is up and running (showing the FastAPI implementation):
 
    .. code-block:: text
 
-      $ python app/server_fastapi.py 
+      $ poetry run app
       INFO:     Will watch for changes in these directories: ['/Users/fz/Dev/xlwings-officejs-quickstart']
       INFO:     Uvicorn running on https://127.0.0.1:8000 (Press CTRL+C to quit)
       INFO:     Started reloader process [56708] using WatchFiles

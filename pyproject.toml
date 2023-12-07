@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "tjc_xlwings_officejs_quickstart"
+version = "0.1.0"
+description = "A demo for using xlwings for TJC"
+authors = ["Richie Caputo <rcaputo3@tjclp.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "0.95.2"
+gunicorn = "20.1.0"
+jinja2 = "3.1.2"
+openai = "1.3.7"
+pandas = "2.0.1"
+python-dotenv = "1.0.0"
+uvicorn = { version = "0.22.0", extras = ["standard"] }
+xlwings = "0.30.12"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+app = "tjc_xlwings_officejs_quickstart.server_fastapi:main"
