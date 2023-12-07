@@ -3,10 +3,12 @@ import datetime as dt
 import numpy as np
 import pandas as pd
 import xlwings as xw
+from openai import OpenAI
 from xlwings import server
 
 # SAMPLE 1: Hello World
 
+client = OpenAI()
 
 @server.func
 def hello(name):
@@ -102,3 +104,29 @@ def timeseries_start(df):
 @server.func(volatile=True)
 def last_calculated():
     return f"Last calculated: {dt.datetime.now()}"
+
+
+@server.func(namespace="openai")
+@server.arg("df", pd.DataFrame)
+def query(df: pd.DataFrame, query: str) -> str:
+    data_csv = df.to_csv()
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant who specializes in excel."
+                                          "You are shown excel data in the form of csv data, and will be asked "
+                                          "a query to help with."
+             },
+            {
+                "role": "user",
+                "content": f"""
+### QUERY: 
+{query}
+
+### DATA: 
+{data_csv}
+"""
+            }
+        ]
+    )
+    return response.choices[0].message.content
